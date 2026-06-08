@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتب أبو أحمد للخدمات المنزلية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            --glass: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.12);
+            --accent: #38bdf8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background: var(--bg) fixed;
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-top: 100px;
+        }
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+        .logo { width: 45px; height: 45px; border-radius: 50%; background: #fff; color: #1e3a8a; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent); }
+        .lang-btn { background: rgba(255,255,255,0.15); border: 1px solid var(--border); color: #fff; padding: 8px 16px; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        .hero { text-align: center; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .badge { display: inline-block; background: rgba(56,189,248,0.2); border: 1px solid var(--accent); color: var(--accent); padding: 6px 16px; border-radius: 20px; margin-bottom: 15px; font-weight: bold; }
+        .hero h1 { font-size: 2.3rem; margin-bottom: 15px; }
+        .hero p { color: #cbd5e1; font-size: 1.1rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px 20px; }
+        .section-title { text-align: center; font-size: 1.8rem; margin: 40px 0 25px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { padding: 25px; text-align: center; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card i { font-size: 2.3rem; color: var(--accent); margin-bottom: 15px; }
+        .form-box { max-width: 650px; margin: 30px auto; padding: 30px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 25px; background: rgba(0,0,0,0.2); padding: 5px; border-radius: 10px; }
+        .tab { flex: 1; background: transparent; border: none; color: #cbd5e1; padding: 10px; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: bold; }
+        .tab.active { background: var(--glass); border: 1px solid var(--border); color: var(--accent); }
+        .group { margin-bottom: 18px; }
+        .group label { display: block; margin-bottom: 6px; font-size: 0.9rem; color: #cbd5e1; }
+        .control { width: 100%; background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 8px; padding: 12px; color: #fff; font-family: inherit; font-size: 1rem; }
+        .control:focus { outline: none; border-color: var(--accent); }
+        select.control option { background: #0f172a; color: #fff; }
+        .btn { width: 100%; background: var(--accent); color: #000; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .footer { margin-top: 30px; padding-top: 25px; border-top: 1px solid var(--border); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .footer-item { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); }
+        html[dir="ltr"] body { font-family: 'Poppins', 'Cairo', sans-serif; }
+    </style>
+</head>
+<body>
+
+    <header class="glass">
+        <div class="logo-area"><div class="logo">AA</div><span id="n-brand"></span></div>
+        <button class="lang-btn" id="l-btn"></button>
+    </header>
+
+    <section class="hero">
+        <div class="badge" id="h-badge"></div>
+        <h1 id="h-title"></h1>
+        <p id="h-desc"></p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title" id="s-title"></h2>
+        <div class="grid" id="s-container"></div>
+
+        <h2 class="section-title" id="f-title"></h2>
+        <div class="form-box glass">
+            <div class="tabs">
+                <button class="tab active" id="t-client"></button>
+                <button class="tab" id="t-worker"></button>
+            </div>
+            <form id="i-form">
+                <div class="group"><label id="l-name"></label><input type="text" id="f-name" class="control" required></div>
+                <div class="group"><label id="l-phone"></label><input type="tel" id="f-phone" class="control" required></div>
+                <div class="group" id="d-group"></div>
+                <div class="group"><label id="l-notes"></label><textarea id="f-notes" class="control" rows="3"></textarea></div>
+                <button type="submit" class="btn" id="b-sub"></button>
+            </form>
+            <div class="footer">
+                <a href="https://wa.me/967785127273" target="_blank" class="footer-item"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i> 785127273</a>
+                <a href="tel:967785127273" class="footer-item"><i class="fa-solid fa-phone" style="color:var(--accent)"></i> <span id="l-call"></span></a>
+                <div class="footer-item"><i class="fa-solid fa-location-dot" style="color:#ef4444"></i> <span id="l-loc"></span></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const data = {
+            ar: {
+                brand: "مكتب أبو أحمد", lang: "English", badge: "📍 خدماتنا متوفرة داخل عدن",
+                title: "مكتب أبو أحمد للخدمات المنزلية", desc: "نوفر لكم خدمات منزلية متكاملة بأعلى مستوى من الجودة والاهتمام، لأن راحتكم وراحة أسرتكم هي أولويتنا دائمًا 💙 عمالة مدربة وموثوقة.",
+                sTitle: "خدماتنا تشمل", fTitle: "بوابة التواصل والتوظيف", tClient: "طلب خدمة (للعملاء)", tWorker: "طلب عمل (للموظفين)",
+                name: "الاسم الكامل", phone: "رقم الهاتف / واتساب", notes: "ملاحظات خاصة", sSel: "اختر الخدمة المطلوبة", jSel: "حدد الوظيفة المناسبة لك",
+                sub: "إرسال الطلب عبر واتساب 🚀", call: "اتصال مباشر", loc: "عدن",
+                srv: [
+                    {i:"fa-broom", t:"تنظيف المنازل والفلل", d:"تنظيف شامل للشقق والمنازل بكل احترافية."},
+                    {i:"fa-sparkles", t:"التنظيف العميق", d:"تعقيم كامل للمطابخ والحمامات بعناية."},
+                    {i:"fa-paint-roller", t:"تنظيف ما بعد التشطيب", d:"إزالة آثار الطلاء والتجهيز للانتقال السكني."},
+                    {i:"fa-calendar-days", t:"عاملات باليوم أو الشهر", d:"توفير الكوادر حسب النظام المناسب لجدولك."},
+                    {i:"fa-baby", t:"مربيات وجليسات أطفال", d:"رعاية آمنة ومسؤولة لأطفالكم مع خبيرات."},
+                    {i:"fa-heart-pulse", t:"رعاية كبار السن", d:"تقديم العناية الصحية والاهتمام لكبار السن بالمنزل."}
+                ],
+                opts: {
+                    client: ["تنظيف منازل/شقق", "تنظيف عميق وتعقيم", "تنظيف ما بعد التشطيب", "عاملة منزلية بالشهر", "عاملة منزلية باليوم", "جليسة أطفال", "رعاية كبار السن"],
+                    worker: ["عاملة نظافة", "مربية أطفال", "مقدم رعاية كبار سن", "طباخ منزلية"]
+                }
+            },
+            en: {
+                brand: "Abu Ahmad Office", lang: "العربية", badge: "📍 Services available within Aden",
+                title: "Abu Ahmad Office for Home Services", desc: "We provide premium integrated home services. Your comfort and your family's safety are always our top priority 💙",
+                sTitle: "Our Services Include", fTitle: "Contact & Jobs Portal", tClient: "Request Service (Clients)", tWorker: "Apply for Job (Seekers)",
+                name: "Full Name", phone: "Phone / WhatsApp", notes: "Special Notes", sSel: "Select Required Service", jSel: "Select Desired Job",
+                sub: "Send via WhatsApp 🚀", call: "Direct Call", loc: "Aden",
+                srv: [
+                    {i:"fa-broom", t:"House & Villa Cleaning", d:"Comprehensive professional cleaning for all residences."},
+                    {i:"fa-sparkles", t:"Deep Cleaning", d:"Full sanitization for kitchens and bathrooms."},
+                    {i:"fa-paint-roller", t:"Post-Construction", d:"Removing construction residues and cleaning post-paint."},
+                    {i:"fa-calendar-days", t:"Daily or Monthly Maids", d:"Flexible packages customized to your needs."},
+                    {i:"fa-baby", t:"Babysitters & Nannies", d:"Safe, reliable and professional care for your kids."},
+                    {i:"fa-heart-pulse", t:"Elderly Home Care", d:"Premium physical and emotional assistance at home."}
+                ],
+                opts: {
+                    client: ["House/Apartment Cleaning", "Deep Cleaning", "Post-Construction", "Monthly Maid", "Daily Maid", "Babysitter / Nanny", "Elderly Care"],
+                    worker: ["Cleaner / Housemaid", "Babysitter / Nanny", "Elderly Caregiver", "Home Cook"]
+                }
+            }
+        };
+
+        let lang = 'ar', mode = 'client';
+
+        function UI() {
+            const d = data[lang];
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+
+            document.getElementById('n-brand').innerText = d.brand;
+            document.getElementById('l-btn').innerText = d.lang;
+            document.getElementById('h-badge').innerText = d.badge;
+            document.getElementById('h-title').innerText = d.title;
+            document.getElementById('h-desc').innerText = d.desc;
+            document.getElementById('s-title').innerText = d.sTitle;
+            document.getElementById('f-title').innerText = d.fTitle;
+            document.getElementById('t-client').innerText = d.tClient;
+            document.getElementById('t-worker').innerText = d.tWorker;
+            document.getElementById('l-name').innerText = d.name;
+            document.getElementById('l-phone').innerText = d.phone;
+            document.getElementById('l-notes').innerText = d.notes;
+            document.getElementById('b-sub').innerText = d.sub;
+            document.getElementById('l-call').innerText = d.call;
+            document.getElementById('l-loc').innerText = d.loc;
+
+            const sc = document.getElementById('s-container');
+            sc.innerHTML = d.srv.map(s => `
+                <div class="card glass">
+                    <i class="fa-solid ${s.i}"></i>
+                    <h3>${s.t}</h3>
+                    <p>${s.d}</p>
+                </div>
+            `).join('');
+
+            const dg = document.getElementById('d-group');
+            const arr = d.opts[mode];
+            const lbl = mode === 'client' ? d.sSel : d.jSel;
+            dg.innerHTML = `
+                <label for="f-sel">${lbl}</label>
+                <select id="f-sel" class="control" required>
+                    ${arr.map(o => `<option value="${o}">${o}</option>`).join('')}
+                </select>
+            `;
+        }
+
+        document.getElementById('l-btn').addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; UI(); });
+        document.getElementById('t-client').addEventListener('click', () => { mode = 'client'; document.getElementById('t-client').classList.add('active'); document.getElementById('t-worker').classList.remove('active'); UI(); });
+        document.getElementById('t-worker').addEventListener('click', () => { mode = 'worker'; document.getElementById('t-worker').classList.add('active'); document.getElementById('t-client').classList.remove('active'); UI(); });
+
+        document.getElementById('i-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const msg = `*${mode === 'client' ? 'طلب خدمة جديد' : 'طلب انضمام للعمل'}*%0A%0A*الاسم:* ${document.getElementById('f-name').value}%0A*الهاتف:* ${document.getElementById('f-phone').value}%0A*المجال:* ${document.getElementById('f-sel').value}%0A*ملاحظات:* ${document.getElementById('f-notes').value}`;
+            window.open(`https://wa.me/967785127273?text=${msg}`, '_blank');
+        });
+
+        UI();
+    </script>
+</body>
+</html>
